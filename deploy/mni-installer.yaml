@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mni-installer
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: mni-installer
+  template:
+    metadata:
+      labels:
+        name: mni-installer
+    spec:
+      serviceAccountName: mni-installer
+      hostNetwork: true
+      containers:
+      - name: installer
+        image: ghcr.io/mNi-Cloud/installation/mni-installer:latest
+        command: ["/bin/sh", "/scripts/install.sh"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: cni-bin
+          mountPath: /opt/cni/bin
+        - name: host-modules
+          mountPath: /lib/modules
+        - name: host-run-ovs
+          mountPath: /var/run/openvswitch
+        - name: host-run-ovn
+          mountPath: /var/run/ovn
+      volumes:
+      - name: config
+        configMap:
+          name: network-config
+          defaultMode: 0644
+      - name: cni-bin
+        hostPath:
+          path: /opt/cni/bin
+          type: DirectoryOrCreate
+      - name: host-modules
+        hostPath:
+          path: /lib/modules
+      - name: host-run-ovs
+        hostPath:
+          path: /var/run/openvswitch
+          type: DirectoryOrCreate
+      - name: host-run-ovn
+        hostPath:
+          path: /var/run/ovn
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mni-installer
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mni-installer
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: mni-installer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mni-installer
+subjects:
+  - kind: ServiceAccount
+    name: mni-installer
+    namespace: kube-system---
