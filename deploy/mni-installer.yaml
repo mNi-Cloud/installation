@@ -16,7 +16,7 @@ spec:
       hostNetwork: true
       containers:
       - name: installer
-        image: ghcr.io/mNi-Cloud/installation/mni-installer:latest
+        image: ghcr.io/mni-cloud/installation/mni-installer:latest
         command: ["/bin/sh", "/scripts/install.sh"]
         securityContext:
           privileged: true
