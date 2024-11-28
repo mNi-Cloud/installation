@@ -30,7 +30,8 @@ jobs:
       
       - name: Generate manifest
         run: |
-          REGISTRY="ghcr.io/${{ github.repository }}"
+          REPO_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          REGISTRY="ghcr.io/${REPO_LOWER}"
           TAG="${{ steps.get_version.outputs.VERSION }}"
           
           mkdir -p deploy
@@ -42,7 +43,6 @@ jobs:
           for ((i=0; i<${num_files}; i++)); do
             file="${manifest_files[$i]}"
             sed "s|\${REGISTRY}|${REGISTRY}|g; s|\${TAG}|${TAG}|g" "$file" >> deploy/mni-installer.yaml
-            # Add separator only if not the last file
             if [ $((i + 1)) -lt ${num_files} ]; then
               echo "---" >> deploy/mni-installer.yaml
             fi
