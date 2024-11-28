@@ -18,5 +18,5 @@ data:
 
 2. Deploy mNi Cloud
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/mni-cloud/installation/refs/heads/main/deploy/mni-installer.yaml
+kubectl apply -f https://raw.githubusercontent.com/mni-cloud/installation/main/deploy/mni-installer.yaml
 ```
