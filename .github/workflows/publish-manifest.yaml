@@ -10,9 +10,14 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
       
       - name: Get version
         id: get_version
@@ -39,8 +44,8 @@ jobs:
       
       - name: Commit and push changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add deploy/mni-installer.yaml
           git commit -m "Update manifest for ${{ steps.get_version.outputs.VERSION }}" || echo "No changes to commit"
-          git push
+          git push origin HEAD:${{ github.ref }}
