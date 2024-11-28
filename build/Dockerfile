@@ -7,5 +7,5 @@ RUN apk add --no-cache curl && \
     chmod +x ./kubectl && \
     mv ./kubectl /usr/local/bin/kubectl
 
-COPY hack/cni-install.sh /scripts/cni-install.sh
-RUN chmod +x /scripts/cni-install.sh
+COPY hack/cni-install.sh /scripts/install.sh
+RUN chmod +x /scripts/install.sh
