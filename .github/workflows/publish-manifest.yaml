@@ -1,0 +1,46 @@
+name: Generate Manifest
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get version
+        id: get_version
+        run: |
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=latest" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Generate manifest
+        run: |
+          REGISTRY="ghcr.io/${{ github.repository }}"
+          TAG="${{ steps.get_version.outputs.VERSION }}"
+          
+          mkdir -p deploy
+          rm -f deploy/mni-installer.yaml
+          
+          # Replace variables in manifests
+          for file in manifests/*.yaml; do
+            sed "s|\${REGISTRY}|${REGISTRY}|g; s|\${TAG}|${TAG}|g" "$file" >> deploy/mni-installer.yaml
+            echo "---" >> deploy/mni-installer.yaml
+          done
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add deploy/mni-installer.yaml
+          git commit -m "Update manifest for ${{ steps.get_version.outputs.VERSION }}" || echo "No changes to commit"
+          git push

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mni-installer
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: mni-installer
+  template:
+    metadata:
+      labels:
+        name: mni-installer
+    spec:
+      serviceAccountName: mni-installer
+      hostNetwork: true
+      containers:
+      - name: installer
+        image: ${REGISTRY}/mni-installer:${TAG}
+        command: ["/bin/sh", "/scripts/install.sh"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: cni-bin
+          mountPath: /opt/cni/bin
+        - name: host-modules
+          mountPath: /lib/modules
+        - name: host-run-ovs
+          mountPath: /var/run/openvswitch
+        - name: host-run-ovn
+          mountPath: /var/run/ovn
+      volumes:
+      - name: config
+        configMap:
+          name: network-config
+          defaultMode: 0644
+      - name: cni-bin
+        hostPath:
+          path: /opt/cni/bin
+          type: DirectoryOrCreate
+      - name: host-modules
+        hostPath:
+          path: /lib/modules
+      - name: host-run-ovs
+        hostPath:
+          path: /var/run/openvswitch
+          type: DirectoryOrCreate
+      - name: host-run-ovn
+        hostPath:
+          path: /var/run/ovn
+          type: DirectoryOrCreate
