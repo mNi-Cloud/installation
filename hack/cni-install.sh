@@ -118,6 +118,10 @@ EOF
 kubectl apply -f temp.yaml
 rm temp.yaml
 
+# Install operator
+curl -L https://github.com/mNi-Cloud/operator/blob/main/manifests/install.yaml | \
+kubectl apply -f -
+
 # Clean up installation resources
 echo "Cleaning up installation resources..."
 kubectl -n kube-system delete daemonset mni-installer

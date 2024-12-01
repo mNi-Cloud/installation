@@ -1,0 +1,34 @@
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Component
+metadata:
+  name: cert-manager
+spec:
+  appVersion: v1.15.3
+---
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Component
+metadata:
+  name: contour
+spec:
+  appVersion: v19.0.2
+---
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Component
+metadata:
+  name: kubevirt
+spec:
+  appVersion: v1.4.0
+---
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Component
+metadata:
+  name: cdi
+spec:
+  appVersion: v1.59.0
+---
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Component
+metadata:
+  name: opa
+spec:
+  appVersion: v0.67.1

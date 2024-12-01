@@ -16,7 +16,27 @@ data:
     EXTERNAL_NETWORK_INTERFACE=eth0
 ```
 
-2. Deploy mNi Cloud
+2. Deploy mNi Operator
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/mni-cloud/installation/main/deploy/mni-installer.yaml
+```
+
+3. Install dependencies
+```bash
+kubectl apply -f https://raw.githubusercontent.com/mni-cloud/installation/main/deploy/components.yaml
+```
+
+4. Install the services you need
+Examle
+```bash
+apiVersion: operator.mnicloud.jp/v1alpha1
+kind: Service
+metadata:
+  name: vpc
+spec:
+  image: ghcr.io/mni-cloud/vpc:latest
+  appVersion: 1.0.0
+  # You may specify secrets to pull the image
+  # imagePullSecrets:
+  #   - name: regcred
 ```
