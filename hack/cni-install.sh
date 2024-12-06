@@ -124,9 +124,9 @@ kubectl apply -f -
 
 # Clean up installation resources
 echo "Cleaning up installation resources..."
-kubectl -n kube-system delete daemonset mni-installer
-kubectl -n kube-system delete configmap network-install
-kubectl -n kube-system delete configmap network-config
-kubectl delete clusterrolebinding mni-installer
-kubectl delete clusterrole mni-installer
-kubectl -n kube-system delete serviceaccount mni-installer
+kubectl -n kube-system delete daemonset mni-installer --ignore-not-found
+kubectl -n kube-system delete configmap network-install --ignore-not-found
+kubectl -n kube-system delete configmap network-config --ignore-not-found
+kubectl delete clusterrolebinding mni-installer --ignore-not-found
+kubectl delete clusterrole mni-installer --ignore-not-found
+kubectl -n kube-system delete serviceaccount mni-installer --ignore-not-found
