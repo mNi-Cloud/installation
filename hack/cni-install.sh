@@ -119,7 +119,7 @@ kubectl apply -f temp.yaml
 rm temp.yaml
 
 # Install operator
-curl -L https://github.com/mNi-Cloud/operator/blob/main/manifests/install.yaml | \
+curl -L https://raw.githubusercontent.com/mNi-Cloud/operator/refs/heads/main/manifests/install.yaml | \
 kubectl apply -f -
 
 # Clean up installation resources
