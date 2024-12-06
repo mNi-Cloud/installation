@@ -12,6 +12,10 @@ spec:
       labels:
         name: mni-installer
     spec:
+      tolerations:
+      - key: node.kubernetes.io/not-ready
+        operator: Exists
+        effect: NoSchedule
       serviceAccountName: mni-installer
       hostNetwork: true
       containers:
