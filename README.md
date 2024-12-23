@@ -16,10 +16,12 @@ data:
     EXTERNAL_NETWORK_INTERFACE=eth0
 ```
 
-2. Deploy mNi Operator
+2. Deploy CNI & mNi Operator
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/mni-cloud/installation/main/deploy/mni-installer.yaml
 ```
+
+
 
 3. Install dependencies
 ```bash

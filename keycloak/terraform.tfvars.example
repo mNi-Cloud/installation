@@ -1,0 +1,3 @@
+keycloak_url = "https://auth.example.com"
+keycloak_username = "admin"
+keycloak_password = "admin"
