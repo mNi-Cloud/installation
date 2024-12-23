@@ -1,5 +1,5 @@
 resource "keycloak_realm" "cloud" {
-  realm = "test"
+  realm = "cloud"
   enabled = true
 
   login_theme = "keycloak-custom-theme"
