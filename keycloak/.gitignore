@@ -12,3 +12,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 users.yaml
+secrets.yaml
