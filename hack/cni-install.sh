@@ -68,7 +68,8 @@ helm upgrade --install cilium cilium/cilium \
   --set devices="eth+ ovn0 genev_sys_6081 vxlan_sys_4789" \
   --set enableIdentityMark=false \
   --set hubble.relay.enabled=true \
-  --set hubble.ui.enabled=true
+  --set hubble.ui.enabled=true \
+  --set daemon.enableSourceIPVerification=false
 
 # Install Multus
 curl -L https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml | \
