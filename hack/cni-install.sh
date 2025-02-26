@@ -11,7 +11,6 @@ kubectl label node -lovn.kubernetes.io/ovs_dp_type!=userspace ovn.kubernetes.io/
 
 # Add helm repos and install components
 helm repo add kubeovn https://kubeovn.github.io/kube-ovn/
-helm repo add cilium https://helm.cilium.io/
 helm repo update
 
 # Install Kube-OVN
@@ -22,54 +21,6 @@ helm upgrade --install kube-ovn kubeovn/kube-ovn \
   --set func.ENABLE_LB_SVC=true \
   --set func.ENABLE_TPROXY=true \
   --set cni_conf.CNI_CONFIG_PRIORITY=10
-
-# Create CNI ConfigMap
-cat << 'EOF' | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cni-configuration
-  namespace: kube-system
-data:
-  cni-config: |-
-    {
-      "name": "generic-veth",
-      "cniVersion": "0.3.1",
-      "plugins": [
-        {
-          "type": "kube-ovn",
-          "server_socket": "/run/openvswitch/kube-ovn-daemon.sock",
-          "ipam": {
-            "type": "kube-ovn",
-            "server_socket": "/run/openvswitch/kube-ovn-daemon.sock"
-          }
-        },
-        {
-          "type": "portmap",
-          "snat": true,
-          "capabilities": {"portMappings": true}
-        },
-        {
-          "type": "cilium-cni"
-        }
-      ]
-    }
-EOF
-
-# Install Cilium
-helm upgrade --install cilium cilium/cilium \
-  --namespace kube-system \
-  --set operator.replicas=1 \
-  --set cni.chainingMode=generic-veth \
-  --set cni.customConf=true \
-  --set cni.configMap=cni-configuration \
-  --set routingMode=native \
-  --set enableIPv4Masquerade=false \
-  --set devices="eth+ ovn0 genev_sys_6081 vxlan_sys_4789" \
-  --set enableIdentityMark=false \
-  --set hubble.relay.enabled=true \
-  --set hubble.ui.enabled=true \
-  --set daemon.enableSourceIPVerification=false
 
 # Install Multus
 curl -L https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml | \
@@ -122,8 +73,6 @@ rm temp.yaml
 # Clean up installation resources
 echo "Cleaning up installation resources..."
 kubectl -n kube-system delete daemonset mni-installer --ignore-not-found
-kubectl -n kube-system delete configmap network-install --ignore-not-found
-kubectl -n kube-system delete configmap network-config --ignore-not-found
 kubectl delete clusterrolebinding mni-installer --ignore-not-found
 kubectl delete clusterrole mni-installer --ignore-not-found
 kubectl -n kube-system delete serviceaccount mni-installer --ignore-not-found
