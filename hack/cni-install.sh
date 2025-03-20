@@ -17,10 +17,8 @@ helm repo update
 helm upgrade --install kube-ovn kubeovn/kube-ovn \
   --namespace kube-system \
   --set MASTER_NODES=${MASTER_IP} \
-  --set func.ENABLE_NP=false \
   --set func.ENABLE_LB_SVC=true \
-  --set func.ENABLE_TPROXY=true \
-  --set cni_conf.CNI_CONFIG_PRIORITY=10
+  --set func.ENABLE_TPROXY=true
 
 # Install Multus
 curl -L https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml | \
@@ -69,10 +67,3 @@ spec:
 EOF
 kubectl apply -f temp.yaml
 rm temp.yaml
-
-# Clean up installation resources
-echo "Cleaning up installation resources..."
-kubectl -n kube-system delete daemonset mni-installer --ignore-not-found
-kubectl delete clusterrolebinding mni-installer --ignore-not-found
-kubectl delete clusterrole mni-installer --ignore-not-found
-kubectl -n kube-system delete serviceaccount mni-installer --ignore-not-found
