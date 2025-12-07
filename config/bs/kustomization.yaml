@@ -6,4 +6,5 @@ namespace: bs
 images:
   - name: controller:latest
     newName: ghcr.io/mni-Cloud/bs-controller
+    newTag: v1.0
 

@@ -6,4 +6,5 @@ namespace: vpc
 images:
   - name: controller:latest
     newName: ghcr.io/mni-Cloud/vpc-controller
+    newTag: v1.0
 

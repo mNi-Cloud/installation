@@ -3,3 +3,5 @@ resources:
   - ../bs
   - ../vm
   - ../ctr
+  - ../dependency-controller
+  - ../api-gateway

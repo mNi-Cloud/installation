@@ -6,4 +6,5 @@ namespace: ctr
 images:
   - name: controller:latest
     newName: ghcr.io/mni-Cloud/ctr-controller
+    newTag: v1.0
 

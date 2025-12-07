@@ -1,0 +1,4 @@
+helmCharts:
+  - name: dependency-controller
+    repo: https://charts.mnicloud.jp
+    version: 0.1.3

@@ -1,0 +1,10 @@
+resources:
+  - github.com/mNi-Cloud/api-gateway/config/default
+
+namespace: api-gateway
+
+images:
+  - name: gateway:latest
+    newName: ghcr.io/mni-Cloud/api-gateway
+    newTag: v1.0
+
