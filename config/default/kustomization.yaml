@@ -1,0 +1,5 @@
+resources:
+  - ../vpc
+  - ../bs
+  - ../vm
+  - ../ctr

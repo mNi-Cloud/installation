@@ -1,0 +1,9 @@
+resources:
+  - github.com/mNi-Cloud/vpc-controller/config/default
+
+namespace: vpc
+
+images:
+  - name: controller:latest
+    newName: ghcr.io/mni-Cloud/vpc-controller
+
