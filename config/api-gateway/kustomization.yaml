@@ -5,6 +5,6 @@ namespace: api-gateway
 
 images:
   - name: gateway:latest
-    newName: ghcr.io/mni-Cloud/api-gateway
+    newName: ghcr.io/mni-cloud/api-gateway
     newTag: v1.0
 

@@ -5,6 +5,6 @@ namespace: vm
 
 images:
   - name: controller:latest
-    newName: ghcr.io/mni-Cloud/vm-controller
+    newName: ghcr.io/mni-cloud/vm-controller
     newTag: v1.0
 
