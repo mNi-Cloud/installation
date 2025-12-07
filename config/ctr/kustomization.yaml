@@ -1,8 +1,6 @@
 resources:
   - github.com/mNi-Cloud/ctr-controller/config/default
 
-namespace: ctr
-
 images:
   - name: controller:latest
     newName: ghcr.io/mni-cloud/ctr-controller

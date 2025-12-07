@@ -1,8 +1,6 @@
 resources:
   - github.com/mNi-Cloud/vm-controller/config/default
 
-namespace: vm
-
 images:
   - name: controller:latest
     newName: ghcr.io/mni-cloud/vm-controller
