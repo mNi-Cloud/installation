@@ -1,7 +1,9 @@
 resources:
+  - ../auth
   - ../vpc
   - ../bs
   - ../vm
   - ../ctr
+  - ../vpn
   - ../dependency-controller
   - ../api-gateway

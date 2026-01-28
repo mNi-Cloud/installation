@@ -1,8 +1,15 @@
 resources:
   - github.com/mNi-Cloud/bs-controller/config/default
+  - github.com/mNi-Cloud/bs-ui/config/default
 
 images:
   - name: controller:latest
     newName: ghcr.io/mni-cloud/bs-controller
     newTag: "1.0"
+  - name: ui:latest
+    newName: ghcr.io/mni-cloud/bs-ui
+    newTag: "1.0"
+
+patches:
+  - path: ui.yaml
 

@@ -1,0 +1,14 @@
+resources:
+  - github.com/mNi-Cloud/auth-controller/config/default
+  - github.com/mNi-Cloud/auth-ui/config/default
+
+images:
+  - name: controller:latest
+    newName: ghcr.io/mni-cloud/auth-controller
+    newTag: "1.0"
+  - name: ui:latest
+    newName: ghcr.io/mni-cloud/auth-ui
+    newTag: "1.0"
+
+patches:
+  - path: ui.yaml
