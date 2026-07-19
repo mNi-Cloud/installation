@@ -5,10 +5,10 @@ resources:
 images:
   - name: controller:latest
     newName: ghcr.io/mni-cloud/vm-controller
-    newTag: "1.0"
+    newTag: "2.0"
   - name: ui:latest
     newName: ghcr.io/mni-cloud/vm-ui
-    newTag: "1.0"
+    newTag: "0.1"
 
 patches:
   - path: ui.yaml
