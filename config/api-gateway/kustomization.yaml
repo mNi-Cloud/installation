@@ -6,3 +6,15 @@ images:
     newName: ghcr.io/mni-cloud/api-gateway
     newTag: "1.0"
 
+patches:
+  - target:
+      kind: Deployment
+      name: api-gateway-gateway-server
+      namespace: api-gateway-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/args
+        value:
+          - --cors-allow-origins
+          - https://yakumo.mnicloud.jp,https://yakumo-api.mnicloud.jp,https://v2.mnicloud.jp,https://v2-api.mnicloud.jp
+
