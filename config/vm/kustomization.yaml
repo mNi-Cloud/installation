@@ -1,6 +1,7 @@
 resources:
   - github.com/mNi-Cloud/vm-controller/config/default
   - github.com/mNi-Cloud/vm-ui/config/default
+  - cdi-clone-rbac.yaml
 
 images:
   - name: controller:latest
