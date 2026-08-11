@@ -1,15 +1,23 @@
 resources:
-  - github.com/mNi-Cloud/vpc-controller/config/default
-  - github.com/mNi-Cloud/vpc-ui/config/default
+  - https://github.com/1outres/juneau//install?ref=v1.0.0-rc.10
+  - https://github.com/mNi-Cloud/vpc-controller//config/default?ref=v2.0.7
+  - https://github.com/mNi-Cloud/vpc-ui//config/default?ref=v0.2.8
 
 images:
-  - name: controller:latest
+  - name: ghcr.io/1outres/juneau/controller
+    newTag: v1.0.0-rc.10
+  - name: ghcr.io/1outres/juneau/daemon
+    newTag: v1.0.0-rc.10
+  - name: ghcr.io/1outres/juneau/bgp-speaker
+    newTag: v1.0.0-rc.10
+  - name: ghcr.io/1outres/juneau/webhookcertjob
+    newTag: v1.0.0-rc.10
+  - name: controller
     newName: ghcr.io/mni-cloud/vpc-controller
-    newTag: "2.0"
-  - name: ui:latest
+    newTag: "2.0.7"
+  - name: ui
     newName: ghcr.io/mni-cloud/vpc-ui
-    newTag: "0.2"
+    newTag: "0.2.8"
 
 patches:
   - path: ui.yaml
-
