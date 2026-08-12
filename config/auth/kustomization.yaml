@@ -1,6 +1,6 @@
 resources:
   - https://github.com/mNi-Cloud/anchorage//config/default?ref=v0.2.3
-  - https://github.com/mNi-Cloud/auth-controller//config/default?ref=v2.0.2
+  - https://github.com/mNi-Cloud/auth-controller//config/default?ref=v2.0.3
   - anchorage-signing-key.yaml
 
 patches:
@@ -33,4 +33,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: ghcr.io/mni-cloud/auth-controller:2.0.2
+        value: ghcr.io/mni-cloud/auth-controller:2.0.3
