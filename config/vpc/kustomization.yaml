@@ -1,7 +1,7 @@
 resources:
   - https://github.com/1outres/juneau//install?ref=v1.0.0-rc.10
-  - https://github.com/mNi-Cloud/vpc-controller//config/default?ref=v2.0.7
-  - https://github.com/mNi-Cloud/vpc-ui//config/default?ref=v0.2.10
+  - https://github.com/mNi-Cloud/vpc-controller//config/default?ref=v1.0.10
+  - https://github.com/mNi-Cloud/vpc-ui//config/default?ref=v1.0.0
 
 images:
   - name: ghcr.io/1outres/juneau/controller
@@ -14,10 +14,10 @@ images:
     newTag: v1.0.0-rc.10
   - name: controller
     newName: ghcr.io/mni-cloud/vpc-controller
-    newTag: "2.0.7"
+    newTag: "1.0.10"
   - name: ui
     newName: ghcr.io/mni-cloud/vpc-ui
-    newTag: "0.2.10"
+    newTag: "1.0.0"
 
 patches:
   - path: ui.yaml

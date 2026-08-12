@@ -6,6 +6,5 @@ resources:
   - ../vm
   - ../ctr
   - ../vpn
-  - ../dependency-controller
+  - ../dependency
   - ../api-gateway
-  - ../snapshot-controller

@@ -1,10 +1,10 @@
 resources:
-  - https://github.com/mNi-Cloud/api-gateway//config/default?ref=v2.0.3
+  - https://github.com/mNi-Cloud/api-gateway//config/default?ref=v1.0.6
 
 images:
   - name: controller
     newName: ghcr.io/mni-cloud/api-gateway
-    newTag: "2.0.3"
+    newTag: "1.0.6"
 
 patches:
   - target:

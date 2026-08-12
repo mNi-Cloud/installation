@@ -1,0 +1,7 @@
+resources:
+  - https://github.com/mNi-Cloud/dependency-controller//config/default?ref=v1.0.2
+
+images:
+  - name: controller
+    newName: ghcr.io/mni-cloud/dependency-controller
+    newTag: "1.0.2"
