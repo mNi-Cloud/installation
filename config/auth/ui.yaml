@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: auth-ui-config
-  namespace: auth-controller-system
-data:
-  VITE_API_BASE_URL: "http://api-gateway-gateway-server-service.api-gateway-system.svc.cluster.local"

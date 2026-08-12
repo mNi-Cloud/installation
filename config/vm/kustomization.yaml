@@ -1,16 +1,19 @@
 resources:
-  - github.com/mNi-Cloud/vm-controller/config/default
-  - github.com/mNi-Cloud/vm-ui/config/default
+  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-operator.yaml
+  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-cr.yaml
+  - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-operator.yaml
+  - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-cr.yaml
+  - https://github.com/mNi-Cloud/vm-controller//config/default?ref=v2.0.15
+  - https://github.com/mNi-Cloud/vm-ui//config/default?ref=v0.2.6
   - cdi-clone-rbac.yaml
 
 images:
-  - name: controller:latest
+  - name: controller
     newName: ghcr.io/mni-cloud/vm-controller
-    newTag: "2.0"
-  - name: ui:latest
+    newTag: "2.0.15"
+  - name: ui
     newName: ghcr.io/mni-cloud/vm-ui
-    newTag: "0.1"
+    newTag: "0.2.6"
 
 patches:
   - path: ui.yaml
-

@@ -1,20 +1,17 @@
 resources:
-  - github.com/mNi-Cloud/api-gateway/config/default
+  - https://github.com/mNi-Cloud/api-gateway//config/default?ref=v2.0.3
 
 images:
-  - name: gateway:latest
+  - name: controller
     newName: ghcr.io/mni-cloud/api-gateway
-    newTag: "1.0"
+    newTag: "2.0.3"
 
 patches:
   - target:
       kind: Deployment
-      name: api-gateway-gateway-server
+      name: api-gateway-controller-manager
       namespace: api-gateway-system
     patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/args
-        value:
-          - --cors-allow-origins
-          - https://yakumo.mnicloud.jp,https://yakumo-api.mnicloud.jp,https://v2.mnicloud.jp,https://v2-api.mnicloud.jp
-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --cors-allow-origins=https://yakumo.mnicloud.jp,https://yakumo-api.mnicloud.jp,https://v2.mnicloud.jp,https://v2-api.mnicloud.jp

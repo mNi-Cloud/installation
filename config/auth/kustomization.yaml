@@ -1,14 +1,22 @@
 resources:
-  - github.com/mNi-Cloud/auth-controller/config/default
-  - github.com/mNi-Cloud/auth-ui/config/default
-
-images:
-  - name: controller:latest
-    newName: ghcr.io/mni-cloud/auth-controller
-    newTag: "1.0"
-  - name: ui:latest
-    newName: ghcr.io/mni-cloud/auth-ui
-    newTag: "0.1"
+  - https://github.com/mNi-Cloud/anchorage//config/default?ref=v0.2.1
+  - https://github.com/mNi-Cloud/auth-controller//config/default?ref=v2.0.1
+  - anchorage-signing-key.yaml
 
 patches:
-  - path: ui.yaml
+  - target:
+      kind: Deployment
+      name: anchorage-controller-manager
+      namespace: anchorage-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: ghcr.io/mni-cloud/anchorage:0.2.1
+  - target:
+      kind: Deployment
+      name: auth-controller-controller-manager
+      namespace: auth-controller-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: ghcr.io/mni-cloud/auth-controller:2.0.1

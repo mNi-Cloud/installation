@@ -1,14 +1,28 @@
 resources:
-  - github.com/mNi-Cloud/vpn-controller/config/default
-  - github.com/mNi-Cloud/vpn-ui/config/default
+  - https://github.com/mNi-Cloud/kodiak//config/default?ref=v0.2.5
+  - https://github.com/mNi-Cloud/vpn-controller//config/default?ref=v0.2.7
+  - https://github.com/mNi-Cloud/vpn-ui//config/default?ref=v0.2.5
 
 images:
-  - name: controller:latest
-    newName: ghcr.io/mni-cloud/vpn-controller
-    newTag: "1.0"
-  - name: ui:latest
+  - name: ui
     newName: ghcr.io/mni-cloud/vpn-ui
-    newTag: "0.1"
+    newTag: "0.2.5"
 
 patches:
   - path: ui.yaml
+  - target:
+      kind: Deployment
+      name: kodiak-controller-manager
+      namespace: kodiak-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: ghcr.io/mni-cloud/kodiak:v0.2.5
+  - target:
+      kind: Deployment
+      name: vpn-controller-controller-manager
+      namespace: vpn-controller-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: ghcr.io/mni-cloud/vpn-controller:v0.2.7
