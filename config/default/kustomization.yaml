@@ -8,3 +8,4 @@ resources:
   - ../vpn
   - ../dependency-controller
   - ../api-gateway
+  - ../snapshot-controller

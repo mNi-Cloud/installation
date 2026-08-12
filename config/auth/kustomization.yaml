@@ -1,9 +1,23 @@
 resources:
-  - https://github.com/mNi-Cloud/anchorage//config/default?ref=v0.2.1
+  - https://github.com/mNi-Cloud/anchorage//config/default?ref=v0.2.2
   - https://github.com/mNi-Cloud/auth-controller//config/default?ref=v2.0.1
   - anchorage-signing-key.yaml
 
 patches:
+  # Anchorage's standalone base includes documented development cookie keys.
+  # A real installation must provide an environment-specific Secret instead
+  # of deploying publicly known signing and encryption material.
+  - target:
+      kind: Secret
+      name: anchorage-cookie-keys
+      namespace: anchorage-system
+    patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: anchorage-cookie-keys
+        namespace: anchorage-system
   - target:
       kind: Deployment
       name: anchorage-controller-manager
@@ -11,7 +25,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: ghcr.io/mni-cloud/anchorage:0.2.1
+        value: ghcr.io/mni-cloud/anchorage:0.2.2
   - target:
       kind: Deployment
       name: auth-controller-controller-manager
