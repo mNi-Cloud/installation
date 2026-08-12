@@ -1,11 +1,11 @@
 resources:
-  - https://github.com/mNi-Cloud/ctr-controller//config/default?ref=v1.0.8
+  - https://github.com/mNi-Cloud/ctr-controller//config/default?ref=v1.0.7
   - https://github.com/mNi-Cloud/ctr-ui//config/default?ref=v1.0.0
 
 images:
   - name: controller
     newName: ghcr.io/mni-cloud/ctr-controller
-    newTag: "1.0.8"
+    newTag: "1.0.7"
   - name: ui
     newName: ghcr.io/mni-cloud/ctr-ui
     newTag: "1.0.0"

@@ -1,6 +1,6 @@
 resources:
   - https://github.com/mNi-Cloud/kodiak//config/default?ref=v1.0.0
-  - https://github.com/mNi-Cloud/vpn-controller//config/default?ref=v1.0.5
+  - https://github.com/mNi-Cloud/vpn-controller//config/default?ref=v1.0.4
   - https://github.com/mNi-Cloud/vpn-ui//config/default?ref=v1.0.0
 
 images:
@@ -25,4 +25,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: ghcr.io/mni-cloud/vpn-controller:v1.0.5
+        value: ghcr.io/mni-cloud/vpn-controller:v1.0.4
