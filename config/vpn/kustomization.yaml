@@ -1,12 +1,12 @@
 resources:
   - https://github.com/mNi-Cloud/kodiak//config/default?ref=v0.2.5
   - https://github.com/mNi-Cloud/vpn-controller//config/default?ref=v0.2.7
-  - https://github.com/mNi-Cloud/vpn-ui//config/default?ref=v0.2.6
+  - https://github.com/mNi-Cloud/vpn-ui//config/default?ref=v0.2.7
 
 images:
   - name: ui
     newName: ghcr.io/mni-cloud/vpn-ui
-    newTag: "0.2.6"
+    newTag: "0.2.7"
 
 patches:
   - path: ui.yaml
