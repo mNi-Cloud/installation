@@ -1,6 +1,6 @@
 resources:
   - https://github.com/mNi-Cloud/ctr-controller//config/default?ref=v2.0.2
-  - https://github.com/mNi-Cloud/ctr-ui//config/default?ref=v0.1.3
+  - https://github.com/mNi-Cloud/ctr-ui//config/default?ref=v0.1.4
 
 images:
   - name: controller
@@ -8,7 +8,7 @@ images:
     newTag: "2.0.2"
   - name: ui
     newName: ghcr.io/mni-cloud/ctr-ui
-    newTag: "0.1.3"
+    newTag: "0.1.4"
 
 patches:
   - path: ui.yaml
