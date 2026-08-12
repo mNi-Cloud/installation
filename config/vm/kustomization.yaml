@@ -4,7 +4,7 @@ resources:
   - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-operator.yaml
   - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-cr.yaml
   - https://github.com/mNi-Cloud/vm-controller//config/default?ref=v2.0.15
-  - https://github.com/mNi-Cloud/vm-ui//config/default?ref=v0.2.6
+  - https://github.com/mNi-Cloud/vm-ui//config/default?ref=v0.2.7
   - cdi-clone-rbac.yaml
 
 images:
@@ -13,7 +13,7 @@ images:
     newTag: "2.0.15"
   - name: ui
     newName: ghcr.io/mni-cloud/vm-ui
-    newTag: "0.2.6"
+    newTag: "0.2.7"
 
 patches:
   - path: ui.yaml
