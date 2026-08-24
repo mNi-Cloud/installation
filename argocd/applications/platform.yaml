@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-platform
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: platform
+spec:
+  project: mni
+  source:
+    repoURL: https://github.com/mNi-Cloud/installation.git
+    targetRevision: v2/main
+    path: config/platform
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-kata
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: platform
+spec:
+  project: mni
+  sources:
+    - repoURL: https://github.com/kata-containers/kata-containers.git
+      targetRevision: 4.0.0
+      path: tools/packaging/kata-deploy/helm-chart/kata-deploy
+      helm:
+        releaseName: kata-deploy
+        valueFiles:
+          - $values/config/platform/kata/values.yaml
+    - repoURL: https://github.com/mNi-Cloud/installation.git
+      targetRevision: v2/main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kata-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

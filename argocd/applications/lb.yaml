@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-lb-envoy-gateway
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: lb
+spec:
+  project: mni
+  sources:
+    - repoURL: https://github.com/envoyproxy/gateway.git
+      targetRevision: v1.8.3
+      path: charts/gateway-helm
+      helm:
+        releaseName: envoy-gateway
+        valueFiles:
+          - $values/config/lb/envoy-gateway/values.yaml
+    - repoURL: https://github.com/mNi-Cloud/installation.git
+      targetRevision: v2/main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: envoy-gateway-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-lb
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: lb
+spec:
+  project: mni
+  source:
+    repoURL: https://github.com/mNi-Cloud/installation.git
+    targetRevision: v2/main
+    path: config/lb
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default

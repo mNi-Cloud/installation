@@ -1,25 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 resources:
-  - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.6.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
-  - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.6.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
-  - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.6.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
-  - https://github.com/kubernetes-csi/external-snapshotter//deploy/kubernetes/snapshot-controller?ref=v8.6.0
-  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-operator.yaml
-  - https://github.com/kubevirt/kubevirt/releases/download/v1.9.0/kubevirt-cr.yaml
-  - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-operator.yaml
-  - https://github.com/kubevirt/containerized-data-importer/releases/download/v1.66.0/cdi-cr.yaml
-  - https://github.com/mNi-Cloud/vm-controller//config/default?ref=v1.0.7
-  - https://github.com/mNi-Cloud/vm-ui//config/default?ref=v1.0.0
-  - cdi-clone-rbac.yaml
-
-images:
-  - name: registry.k8s.io/sig-storage/snapshot-controller
-    newTag: v8.6.0
-  - name: controller
-    newName: ghcr.io/mni-cloud/vm-controller
-    newTag: "1.0.7"
-  - name: ui
-    newName: ghcr.io/mni-cloud/vm-ui
-    newTag: "1.0.0"
-
-patches:
-  - path: ui.yaml
+  - kubevirt
+  - cdi
+  - snapshot-controller
+  - controller
+  - ui

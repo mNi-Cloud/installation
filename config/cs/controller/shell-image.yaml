@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cs-controller-controller-manager
+  namespace: cs-controller-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          args:
+            - --metrics-bind-address=:8443
+            - --leader-elect
+            - --health-probe-bind-address=:8081
+            - --api-bind-address=:8080
+            - --shell-image=ghcr.io/mni-cloud/cloudshell:1.0.1
+            - --webhook-cert-path=/tmp/k8s-webhook-server/serving-certs

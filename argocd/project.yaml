@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: mni
+  namespace: argocd
+spec:
+  description: mNi Cloud production services
+  sourceRepos:
+    - https://github.com/mNi-Cloud/installation.git
+    - https://github.com/kata-containers/kata-containers.git
+    - https://github.com/envoyproxy/gateway.git
+    - https://clastix.github.io/charts
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

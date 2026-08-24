@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-controller-controller-manager
+  namespace: k8s-controller-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          env:
+            - name: KAMAJI_MANAGEMENT_KUBECONFIG_SECRET_NAME
+              value: management-kubeconfig
+            - name: KAMAJI_MANAGEMENT_KUBECONFIG_SECRET_NAMESPACE
+              value: kamaji-system
+            - name: KAMAJI_MANAGEMENT_KUBECONFIG_SECRET_KEY
+              value: value
+            - name: PEER_POD_NODE_IMAGE
+              value: ghcr.io/mni-cloud/cloud-api-adaptor-provider-kubernetes-peer-pod-node:1.0.8

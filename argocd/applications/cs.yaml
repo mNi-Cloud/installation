@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-cs
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: cs
+spec:
+  project: mni
+  source:
+    repoURL: https://github.com/mNi-Cloud/installation.git
+    targetRevision: v2/main
+    path: config/cs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default

@@ -1,0 +1,3 @@
+service:
+  annotations:
+    juneau.loutres.me/shared-service: "true"

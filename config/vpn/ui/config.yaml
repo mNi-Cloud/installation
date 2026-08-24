@@ -4,4 +4,4 @@ metadata:
   name: vpn-ui-config
   namespace: vpn-controller-system
 data:
-  VITE_API_BASE_URL: "http://api-gateway-gateway-server-service.api-gateway-system.svc.cluster.local"
+  VITE_API_BASE_URL: "http://api-gateway-gateway-service.api-gateway-system.svc.cluster.local"

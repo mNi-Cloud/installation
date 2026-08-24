@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://github.com/mNi-Cloud/vm-ui//config/default?ref=v1.0.8
+images:
+  - name: ui
+    newName: ghcr.io/mni-cloud/vm-ui
+    newTag: "1.0.8"
+patches:
+  - path: config.yaml
