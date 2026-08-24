@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://github.com/mNi-Cloud/auth-ui//config/default?ref=v1.0.0
+
+images:
+  - name: ui
+    newName: ghcr.io/mni-cloud/auth-ui
+    newTag: "1.0.0"

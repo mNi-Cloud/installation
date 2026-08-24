@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://github.com/mNi-Cloud/k8s-ui//config/default?ref=v1.0.9
+images:
+  - name: ui
+    newName: ghcr.io/mni-cloud/k8s-ui
+    newTag: "1.0.9"

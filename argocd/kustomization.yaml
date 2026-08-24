@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - project.yaml
+  - applications/platform.yaml
+  - applications/auth.yaml
+  - applications/api-gateway.yaml
+  - applications/vpc.yaml
+  - applications/bs.yaml
+  - applications/vm.yaml
+  - applications/ctr.yaml
+  - applications/vpn.yaml
+  - applications/cs.yaml
+  - applications/lb.yaml
+  - applications/k8s.yaml
+  - applications/bootstrap.yaml

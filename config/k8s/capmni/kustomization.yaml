@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://github.com/mNi-Cloud/cluster-api-provider-mni//config/default?ref=v1.0.1
+
+images:
+  - name: controller
+    newName: ghcr.io/mni-cloud/cluster-api-provider-mni
+    newTag: "v1.0.1"

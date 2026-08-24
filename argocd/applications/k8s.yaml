@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-k8s-kamaji-crds
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: k8s
+spec:
+  project: mni
+  source:
+    repoURL: https://clastix.github.io/charts
+    chart: kamaji-crds
+    targetRevision: 0.0.0+latest
+    helm:
+      releaseName: kamaji-crds
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kamaji-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-k8s-kamaji
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: k8s
+spec:
+  project: mni
+  sources:
+    - repoURL: https://clastix.github.io/charts
+      chart: kamaji
+      targetRevision: 0.0.0+latest
+      helm:
+        releaseName: kamaji
+        valueFiles:
+          - $values/config/k8s/kamaji/values.yaml
+        parameters:
+          - name: image.tag
+            value: 26.8.3-edge
+    - repoURL: https://github.com/mNi-Cloud/installation.git
+      targetRevision: v2/main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kamaji-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mni-k8s
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: mni
+    mni.mnicloud.jp/responsibility: k8s
+spec:
+  project: mni
+  source:
+    repoURL: https://github.com/mNi-Cloud/installation.git
+    targetRevision: v2/main
+    path: config/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default

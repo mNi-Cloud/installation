@@ -1,0 +1,14 @@
+apiVersion: sandbox.caa.mnicloud.jp/v1alpha1
+kind: PodSandboxClass
+metadata:
+  name: default
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  runnerImage: ghcr.io/mni-cloud/cloud-api-adaptor-provider-kubernetes-runner-cloud-hypervisor:1.0.8
+  podVMImage: ghcr.io/mni-cloud/cloud-api-adaptor-provider-kubernetes-podvm:1.0.8
+  networkMTU: 1500
+  nodeSelector:
+    mnicloud.jp/kata: "true"
+  runtimeAssetsDir: /opt/kata
+  memoryOverheadMiB: 256

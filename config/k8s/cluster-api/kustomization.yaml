@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.13.4/core-components.yaml
+  - https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.13.4/bootstrap-components.yaml
+
+patches:
+  - path: controller-args.yaml

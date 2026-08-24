@@ -1,17 +1,5 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
-  - https://github.com/mNi-Cloud/api-gateway//config/default?ref=v1.0.6
-
-images:
-  - name: controller
-    newName: ghcr.io/mni-cloud/api-gateway
-    newTag: "1.0.6"
-
-patches:
-  - target:
-      kind: Deployment
-      name: api-gateway-controller-manager
-      namespace: api-gateway-system
-    patch: |-
-      - op: add
-        path: /spec/template/spec/containers/0/args/-
-        value: --cors-allow-origins=https://yakumo.mnicloud.jp,https://yakumo-api.mnicloud.jp,https://v2.mnicloud.jp,https://v2-api.mnicloud.jp
+  - controller

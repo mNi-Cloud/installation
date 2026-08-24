@@ -1,0 +1,17 @@
+nodeSelector:
+  mnicloud.jp/kata: "true"
+
+snapshotter:
+  setup: []
+
+shims:
+  disableAll: true
+  clh-runtime-rs:
+    enabled: true
+
+defaultShim:
+  amd64: clh-runtime-rs
+
+runtimeClasses:
+  enabled: true
+  createDefault: false

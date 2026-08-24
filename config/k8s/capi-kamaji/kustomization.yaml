@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://github.com/clastix/cluster-api-control-plane-provider-kamaji/releases/download/v0.20.0/control-plane-components.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: capi-kamaji-controller-manager
+      namespace: kamaji-system
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/args
+        value:
+          - --leader-elect
+          - --feature-gates=DynamicInfrastructureClusterPatch=true,ExternalClusterReference=true,ExternalClusterReferenceCrossNamespace=true,SkipInfraClusterPatch=false
+          - --dynamic-infrastructure-clusters=MniCluster
+  - target:
+      kind: ClusterRole
+      name: capi-kamaji-manager-role
+    patch: |-
+      - op: add
+        path: /rules/-
+        value:
+          apiGroups:
+            - infrastructure.cluster.x-k8s.io
+          resources:
+            - mniclusters
+          verbs:
+            - get
+            - list
+            - watch
+            - patch
