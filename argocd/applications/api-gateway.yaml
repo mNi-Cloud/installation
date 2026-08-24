@@ -15,3 +15,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
+  ignoreDifferences:
+    - group: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: api-gateway-aggregated-resource-access-role
+      jsonPointers:
+        - /rules
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
