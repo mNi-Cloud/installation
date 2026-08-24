@@ -57,9 +57,20 @@ change `targetRevision` to the test branch and restore it before merging.
 
 ## Cluster-specific inputs
 
-The repository intentionally does not copy E2E host names, OAuth clients,
-self-signed certificates, BGP peers, or test SMTP settings. Supply those
-production values from the environment-specific configuration before syncing.
+This public repository is an environment-neutral base. It intentionally does
+not contain cluster host names, CORS origins, OAuth clients, certificates, BGP
+peers, SMTP settings, storage choices, or credentials. A deployment repository
+should reference an immutable commit of this repository from a cluster-specific
+Kustomize overlay and point its Argo CD Applications at that overlay.
+
+Do not sync the reference Applications in `argocd/applications` into a
+production cluster without first supplying the cluster-specific configuration.
+They point directly at the environment-neutral bases and are provided for
+development, validation, and as templates for deployment repositories.
+
+Secrets must not be committed in plaintext, including to a private deployment
+repository. Keep them in an external secret store, encrypt them for GitOps, or
+bootstrap them directly in the cluster.
 
 Managed Kubernetes additionally requires the
 `kamaji-system/management-kubeconfig` Secret with kubeconfig data in the
