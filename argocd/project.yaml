@@ -9,6 +9,7 @@ spec:
     - https://github.com/mNi-Cloud/installation.git
     - https://github.com/kata-containers/kata-containers.git
     - https://github.com/envoyproxy/gateway.git
+    - docker.io/envoyproxy
     - https://clastix.github.io/charts
   destinations:
     - server: https://kubernetes.default.svc

@@ -9,9 +9,9 @@ metadata:
 spec:
   project: mni
   sources:
-    - repoURL: https://github.com/envoyproxy/gateway.git
+    - repoURL: docker.io/envoyproxy
+      chart: gateway-helm
       targetRevision: v1.8.3
-      path: charts/gateway-helm
       helm:
         releaseName: envoy-gateway
         valueFiles:
