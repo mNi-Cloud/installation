@@ -5,6 +5,7 @@ resources:
   - ../platform
   - ../auth
   - ../api-gateway
+  - ../acfg
   - ../vpc
   - ../bs
   - ../vm

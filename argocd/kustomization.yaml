@@ -5,6 +5,7 @@ resources:
   - applications/platform.yaml
   - applications/auth.yaml
   - applications/api-gateway.yaml
+  - applications/acfg.yaml
   - applications/vpc.yaml
   - applications/bs.yaml
   - applications/vm.yaml
