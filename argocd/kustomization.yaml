@@ -14,4 +14,5 @@ resources:
   - applications/cs.yaml
   - applications/lb.yaml
   - applications/k8s.yaml
+  - applications/playground.yaml
   - applications/bootstrap.yaml
