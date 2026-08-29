@@ -7,12 +7,12 @@ kind: Kustomization
 # playground-db と playground-content-repo は Secret なのでここには無い。クラスタに
 # 直接作る。
 resources:
-  - https://github.com/mNi-Cloud/playground//config/prod?ref=v1.0.2
+  - https://github.com/mNi-Cloud/playground//config/prod?ref=v1.0.3
 
 images:
   - name: playground-ui
     newName: ghcr.io/mni-cloud/playground/ui
-    newTag: "1.0.2"
+    newTag: "1.0.3"
   - name: playground-backend
     newName: ghcr.io/mni-cloud/playground/backend
-    newTag: "1.0.2"
+    newTag: "1.0.3"
