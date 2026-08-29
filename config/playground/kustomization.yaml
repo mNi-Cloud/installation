@@ -1,10 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# playground だけ config/default ではなく config/prod を指す。イメージの上書きも
-# postgres も向こうの overlay が持っているので、上げるときは ref を差し替えるだけでよい。
+# playground だけ config/default ではなく config/prod を指す。postgres と anchorage の
+# Client は向こうの overlay が持っている。
 #
 # playground-db と playground-content-repo は Secret なのでここには無い。クラスタに
 # 直接作る。
 resources:
-  - https://github.com/mNi-Cloud/playground//config/prod?ref=v1.0.0
+  - https://github.com/mNi-Cloud/playground//config/prod?ref=v1.0.2
+
+images:
+  - name: playground-ui
+    newName: ghcr.io/mni-cloud/playground/ui
+    newTag: "1.0.2"
+  - name: playground-backend
+    newName: ghcr.io/mni-cloud/playground/backend
+    newTag: "1.0.2"
