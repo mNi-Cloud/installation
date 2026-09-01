@@ -8,3 +8,12 @@ images:
   - name: controller
     newName: ghcr.io/mni-cloud/cert-controller
     newTag: "1.0.1"
+
+patches:
+  - target:
+      kind: Namespace
+      name: cert-controller-system
+    patch: |-
+      - op: add
+        path: /metadata/labels/api-gateway.mnicloud.jp~1routes-enabled
+        value: "true"
