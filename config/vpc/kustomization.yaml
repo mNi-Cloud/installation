@@ -4,3 +4,28 @@ resources:
   - juneau
   - controller
   - ui
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: juneau-controller-manager
+      namespace: juneau-system
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --enable-probe-rewrite
+  - target:
+      group: batch
+      version: v1
+      kind: Job
+      name: juneau-webhook-cert-bootstrap
+      namespace: juneau-system
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1hook
+        value: Sync
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1hook-delete-policy
+        value: BeforeHookCreation,HookSucceeded
